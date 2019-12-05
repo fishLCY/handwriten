@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       div{
+           height:300px;
+       }
+       /* .box1{
+           position: relative;
+       }
+       .left{
+           position: absolute;
+           background-color: lightseagreen;
+           width: 200px;
+       }
+       .right{
+           position: absolute;
+           top:0;
+           right:0;
+           width:300px;
+           background-color:lightseagreen;
+       }
+       .middle{
+           background-color:lightcyan;
+           margin:0 300px 0 200px;
+       }
+        */
+       .left{
+           width: 150px;
+           float:left;
+           background-color: darkblue;
+       }
+       .right{
+           width: 220px;
+           float: right;
+           background-color: cyan;
+       }
+       .middle
+       {
+        margin: 0 200px 0 100px;
+        background-color: darkorange;
+       }
+    </style>
+</head>
+<body>
+    <!-- 1.左右定位 中间设置外边距 -->
+<!-- <div class='box1'>
+    <div class="left"></div>
+    <div class="middle">三栏布局</div>
+    <div class="right"></div>
+</div> -->
+<!-- 2.左右浮动，中间div放在最后 -->
+<div class='box1'>
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="middle">三栏布局</div>
+    </div>
+</body>
+</html>
