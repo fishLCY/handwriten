@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 如何把一个字符串中的大小写取反（大写变小写）
+        let str='fsBNdg优酷说服DFBsfN三个月的GYJJ';
+        //  stringObject.replace(regexp/substr,replacement),
+        // replace() 方法执行的是查找并替换的操作
+        // str=str.replace(/[a-zA-Z]/g,content=>{
+            // content.toUpperCase()===content;
+            // content.charCodeAt()>=65&&content.charCodeAt()<=90
+            // 将它变成大写，改变之后是大写则变成大写，改变之后不变则本身是大写
+        //     return content.toUpperCase()===content?content:content.toUpperCase();
+        // });
+        // console.log(str);
+        str=str.replace(/[a-zA-Z]/g,content=>{
+            return content===content.toUpperCase()?content:content.toUpperCase()
+        })
+        console.log()
+
+    </script>
+</body>
+</html>
