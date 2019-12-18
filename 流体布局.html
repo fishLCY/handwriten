@@ -1,0 +1,89 @@
+
+    <!-- 流布局与固定宽度布局基本不同点就在于对网站尺寸的测量单位不同。
+        固定宽度布局使用的是像素，但是流布局使用的是百分比，看到百分比，你应该想到，这将提供了很强的可塑性和流动性。
+        换句话说，通过设置了百分比，你将不需要考虑设备尺寸或者屏幕宽度大小了，结论就是，你可以为每种情形找到一种可行的方案，
+        因为你的设计尺寸将适应所有的设备尺寸。
+        流布局与媒体查询和优化样式技术的关系密切。
+        单纯的基于百分比宽度是不足以在一个大屏幕中实现你设计。 -->
+    <!-- 流体布局设计随着用户对浏览器窗口的扩大或缩小而伸展或收缩。这种设计通常使用百分数。
+     优势
+        页面会伸展到整个浏览器窗口，所以即使在大屏幕上，页面的周围 也没有空白；
+        如果用户的窗口很小，页面就会收缩以适应窗口，而不必横向滚动；
+        即使用户设置的字体比设计人预设的更大，这种设计也可以适应（因为页面可以伸展）。
+     劣势
+        如果不对页面各个部分的宽度加以控制，那么页面设计会和预期的效果大相径庭，
+        例如某些项目或元素挤压到一起，其周围出现意想不到的空隙；
+        如果用户的窗口非常宽，文本行就会很长，以至于难以阅读；
+        如果用户的窗口非常窄，单词可能会被挤压，导致每行只有几个单词；
+        如果一个固定宽度的元素位于一个不能容纳它的盒子里，那么这个元素就会溢出盒子。
+        由于流体布局可以伸展到浏览器窗口的整个宽度，产生难以阅读的长文本行，所以有些流媒体布局只让页面的一部分伸展和收缩。
+    在页面的其它部分则限制最大和最小宽度。 -->
+
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>Liquid Layout</title>
+            <style type="text/css">
+                * {
+                    color: #fff;
+                    text-align: center;}
+                body {
+                    width: 90%;
+                    margin: 0 auto;}
+                #content {
+                    overflow: auto;}
+                #nav, #feature, #footer {
+                    margin: 1%;}
+                .column1, .column2, .column3 {
+                    width: 31.3%;
+                    float: left;
+                    margin: 1%;}
+                .column3 {
+                    margin-right: 0%;}
+                li {
+                    display: inline;
+                    padding: 0.5em;}
+                #nav, #footer {
+                    
+                    padding: 0.5em 0;}
+                #feature, .article {
+                    color:#fff;
+                    height: 10em;
+                    margin-bottom: 1em;
+                    }
+            </style>
+        </head>
+        <body>
+            <h1 style="color:#706fd3">软件开发，成就梦想</h1>
+            <h2><a href="https://www.liyongzhen.com/" style="color:#000">学编程，上利永贞网</a></h2>
+            <div id="header">
+                <h1>Logo</h1>
+                <div id="nav">
+                    <ul>
+                        <li><a href="">首页</a></li>
+                        <li><a href="">产品</a></li>
+                        <li><a href="">服务</a></li>
+                        <li><a href="">关于我们</a></li>
+                        <li><a href="">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="content">
+                <div id="feature">
+                    <p>功能</p>
+                </div>
+                <div class="article column1">
+                    <p>第一列</p>
+                </div>
+                <div class="article column2">
+                    <p>第二列</p>
+                </div>
+                <div class="article column3">
+                    <p>第三列</p>
+                </div>
+            </div>
+            <div id="footer">
+                <p>&copy; Copyright 2019</p>
+            </div>
+        </body>
+    </html>

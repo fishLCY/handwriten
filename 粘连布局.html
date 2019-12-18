@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+           * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+         height: 100%; /*高度一层层继承下来 */ 
+      }
+      #wrap {
+        min-height: 100%;
+        background: pink;
+        text-align: center;
+        overflow: hidden;
+      }
+      #wrap .main {
+        padding-bottom: 50px;
+      }
+      #footer {
+        height: 50px;
+        background: deeppink;
+        margin-top: -50px;
+      }
+    </style>
+</head>
+<body>
+    <!--特点: 有一块内容<main>，当<main>的高足够长的时候，
+    紧跟在<main>后面的元素<footer>会跟在<main>元素的后面。
+    当<main>元素比较短的时候(比如小于屏幕的高度),
+    我们期望这个<footer>元素能够“粘连”在屏幕的底部 -->
+    <!-- 实现步骤
+            (1)footer必须是一个独立的结构，与wrap没有任何嵌套关系
+            (2)wrap区域的高度通过设置min-height，变为视口高度
+            (3)footer要使用margin为负来确定自己的位置
+            (4)在main区域需要设置 padding-bottom。
+               这也是为了防止负 margin 导致 footer 覆盖任何实际内容。
+    -->
+    <div id="wrap">
+        <div class="main">
+          main <br />
+          main <br />
+          main <br />
+        </div>
+      </div>
+      <div id="footer">footer</div>
+</body>
+</html>
