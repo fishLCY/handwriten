@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    1.执行script中所有同步代码（过程中可能会向队列中添加待执行的回调函数）
+    2.依次取出微队列中所有的回调(任务)去执行
+    3.取出宏队列中第一个回调（任务）去执行（过程中可能向微队列中添加回调）
+    4.如果微队列有待处理的任务，执行2
+
+<script>
+        //1. new Promise(resolve => {
+        //     console.log(1);
+        //     resolve(3);
+        //     Promise.resolve().then(()=>console.log(4))
+        // }).then(num => {
+        //     console.log(num)
+        // })
+        // console.log(2)
+//构造函数中的 resolve 或 reject 只有第一次执行有效，多次调用没有任何作用
+// ——>promise 状态一旦改变则不能再变。
+        //2. const promise = new Promise((resolve, reject) => {
+        //     resolve('success1')
+        //     reject('error')
+        //     resolve('success2')
+        //     })
+        // promise
+        // .then((res) => {
+        //     console.log('then: ', res)
+        // })
+        // .catch((err) => {
+        //     console.log('catch: ', err)
+        // })
+// .then 或者 .catch 的参数期望是函数，传入非函数则会发生值穿透
+                // Promise.resolve(1)
+                //     .then(2)
+                //     .then(Promise.resolve(3))
+                //     .then(console.log)
+</script>
+</body>
+</html>

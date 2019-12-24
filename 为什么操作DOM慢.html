@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+因为 DOM 是属于渲染引擎中的东西，而 JS 又是 JS 引擎中的东西。
+当我们通过 JS 操作 DOM 的时候，其实这个操作涉及到了两个线程之间的通信，那么势必会带来一些性能上的损耗。
+操作 DOM 次数一多，也就等同于一直在进行线程之间的通信，
+并且操作 DOM 可能还会带来重绘回流的情况，所以也就导致了性能上的问题。
+经典面试题：插入几万个 DOM，如何实现页面不卡顿？
+对于这道题目来说，首先我们肯定不能一次性把几万个 DOM 全部插入，这样肯定会造成卡顿，
+所以解决问题的重点应该是如何分批次部分渲染 DOM。
+大部分人应该可以想到通过  requestAnimationFrame 的方式去循环的插入 DOM，
+其实还有种方式去解决这个问题：虚拟滚动（virtualized scroller）。
+80
+这种技术的原理就是只渲染可视区域内的内容，非可见区域的那就完全不渲染了，
+当用户在滚动的时候就实时去 替换渲染的内容。
+
+</body>
+</html>
