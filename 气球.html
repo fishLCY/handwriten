@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+     * {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ccc;
+    overflow: hidden;
+}
+
+.balloon {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    background-color: #faf9f9;
+    /*圆角属性*/
+    border-radius: 50% 50% 25% 50%;
+    /*顺时针旋转45度*/
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    /*盒子阴影 x位移 y位移 羽化 半径 颜色*/
+    box-shadow: -8px -8px 80px -8px #873940 inset;
+}
+
+.balloon::after {
+    position: absolute;
+    content: ''; /*内容必须要有*/
+    bottom: 3px;
+    right: 3px;
+    border: 8px solid transparent;
+    border-right-color: #873940;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    border-radius: 50%;
+}
+    </style>
+</head>
+<body>
+<script>
+    var num = 10;
+    //获取浏览器宽高
+    var wH = window.innerHeight,
+        hW = window.innerWidth,
+        bz = 160;
+    var balloons = [];
+    
+    init();//初始化十个气球
+    move();//动画
+    addListener(document.body, 'click', clickBalloon);//事件委托，为body添加事件监听。
+    
+    //初始化函数
+    function init() {
+        //创建dom片段
+        var fragment = document.createDocumentFragment();
+        for (var i = 0; i < num; i++) {
+            var aBalloon = document.createElement('div');
+            aBalloon.className = 'balloon';
+            var randomX = ~~(Math.random() * (hW - bz));
+            randomX = Math.max(0, randomX);
+            aBalloon.style.top = wH - bz + 'px';//设置垂直位置
+            aBalloon.style.left = randomX + 'px';//设置横向位置
+            aBalloon.speed = ~~(8 * Math.random())+1;//设置上移速度
+            balloons.push(aBalloon);
+            fragment.appendChild(aBalloon);
+        }
+        document.body.appendChild(fragment);
+    }
+    
+    //气球移动函数
+    //不用setInterval：因为setInterval容易发生丢帧
+    function move() {
+        //如果没有气球了，停止此setTimeout
+        var len = balloons.length;
+        if (balloons.length === 0) {
+            return 0;
+        } else {
+            //遍历所有的气球
+            for (var i = 0; i < len; i++) {
+                //如果气球飞出浏览器
+                if (~~(balloons[i].style.top.slice(0, -2)) < -160) {
+                    var me = balloons[i];
+                    me.parentNode.removeChild(me);
+                    //删除此节点后要初始化balloons对象
+                    balloons = document.querySelectorAll('.balloon');
+                    i--;
+                    len--;
+                } else {
+                    balloons[i].style.top = balloons[i].offsetTop - balloons[i].speed + 'px';
+                }
+            }
+            setTimeout(move, 1000 / 60);
+        }
+    }
+    
+    //点击气球函数
+    function clickBalloon(event) {
+        if (event.target.className === 'balloon') {
+            //判断触发事件的元素的类名是否是balloon
+            boom.call(event.target, function () {
+                //为什么不把此句放到boom的if语句中：因为，这里是最后气球的动画，如果我们不想要消失了，想换成动画，就在这里修改
+                console.log(this.parentNode);
+                this.parentNode.removeChild(this);
+            }.bind(event.target));//让evnet.target去替换boom中的this去执行***
+        }
+    }
+    
+    //气球爆炸函数
+    function boom(cb) {
+        //注意不使用bind的话setInterval的this是指向window，因为setInterval总是由浏览器去调用
+        //bind：硬绑定，延迟触发函数，内部指向强制绑定指定对象。
+        //call是主动触发
+        this.timer = setInterval(function () {
+            if (this.offsetWidth < 10) {
+                clearInterval(this.timer);
+                //this.parentNode.removeChild(this);
+                cb && cb();//cb如果存在，cb执行
+            } else {
+                this.speed++;
+                this.style.width = this.offsetWidth - 10 + 'px';//宽度减少
+                this.style.height = this.offsetHeight - 10 + 'px';//高度减少
+            }
+        }.bind(this), 1000 / 30);
+    }
+    
+    
+    /*
+     * addEventListener:监听Dom元素的事件
+     *
+     * target：监听对象
+     * type：监听函数类型，如click,mouseover
+     * func：监听函数
+     */
+    
+    function addListener(target, type, func) {
+        target.addEventListener ? target.addEventListener(type, func, false) : target.attachEvent("on" + type, func);
+    }
+    function removeListener(target, type, func) {
+        target.removeEventListener ? target.removeEventListener(type, func, false) : target.detachEvent("on" + type, func);
+    }
+</script>
+</body>
+</html>
