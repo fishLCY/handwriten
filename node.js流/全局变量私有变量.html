@@ -8,7 +8,25 @@
 </head>
 <body>
    <script>
-       
+       var a=12;
+           b=13;
+           c=14;
+        function fn(a){
+            /* 
+                1.形参赋值：a=12
+             */
+             /* 
+                在私有作用域中，只有两种情况是私有变量：
+                A.声明过的变量(var/function/....)
+                B.形参也是私有变量
+             剩下的都不是自己私有的变量，需要基于作用域链的机制向上查找
+              */
+            console.log(a,b,c);
+            var b=c=a=20;
+            console.log(a,b,c);
+        }
+        fn(a)/* 实参就是：值——>12 */
+        console.log(a,b,c)
     </script> 
 </body>
-</html>
+</html>{}
