@@ -5,27 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        div{
-            height:200px;
-            width:200px;
-        }
-        .left{
-            background-color: deepskyblue;
-            float: left;
-        }
-        .right{
-            float: right;
-            background-color:olive;
-        }
-        .middle{
-            background-color: brown;
-        }
-    </style>
 </head>
 <body>
-    <div class="left"></div>
-    <div class="middle"></div>
-    <div class="right"></div>
+    <script>
+    async function async1() {
+      console.log('async1 start');
+      await async2();
+      console.log('async1 end');
+    }
+    async function async2() {
+      console.log('async2');
+    }
+    console.log('script start');
+    setTimeout(function () {
+      console.log('setTimeout');
+    }, 0)
+    async1();
+    new Promise(function (resolve) {
+      console.log('promise1');
+      resolve();
+    }).then(function () {
+      console.log('promise2');
+    });
+    console.log('script end');
+    </script>
 </body>
 </html>
