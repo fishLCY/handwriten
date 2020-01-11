@@ -12,7 +12,7 @@ class Koa extends EventEmitter{
         this.request=request;
         this.response=response;
     }
-    // use()是中间件：实现别人的函数通过use
+    // use(fn)->fn是中间件
     use(){
         this.fn=fn;
     }

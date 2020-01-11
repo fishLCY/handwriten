@@ -51,10 +51,12 @@ module.exports = class Application extends Emitter {
         debug('use %s', fn._name || fn.name || '-');
         // Application的实例对象
         this.middleware.push(fn);
+        // 返回了this，这使得在添加中间件的时候能链式调用。
         return this;
     }
 
-  //启动服务
+  //Koa通过app.listen(port)函数在某个端口启动服务。
+ // listen函数通过http模块开启服务：
   listen(...args) {
     debug('listen');
     const server = http.createServer(this.callback());
@@ -83,7 +85,6 @@ module.exports = class Application extends Emitter {
     }
     /*callback函数的返回值 必须是一个函数
       而且这个函数是我们每次请求过来时的回调函数!*/
-
     //ctx createContext返回的上下文对象
     //fnMiddleware  compose函数返回的尾递归函数
   handleRequest(ctx, fnMiddleware) {
@@ -98,6 +99,7 @@ module.exports = class Application extends Emitter {
     }
 
 // callback()的返回值一定是个函数，而且返回来的这个函数是请求过来时的回调函数
+// app.callback()负责合并中间件，创建请求上下文对象以及返回请求处理函数等。
   callback() {
       //返回尾递归函数
       // compose()是依赖koa-compose这个包的

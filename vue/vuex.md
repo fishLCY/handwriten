@@ -1,0 +1,1 @@
+Vue组件通过dispatch来触发vuex的actions

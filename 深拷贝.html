@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 深拷贝会另外拷贝一份一个一模一样的对象,从堆内存中开辟一个新的区域存放新对象,
+        // 新对象跟原对象不共享内存，修改新对象不会改到原对象。
+
+function clone(target) {
+    if (typeof target === 'object') {
+        let cloneTarget = Array.isArray(target) ? [] : {};
+        for (const key in target) {
+            cloneTarget[key] = clone(target[key]);
+        }
+        return cloneTarget;
+    } else {
+        return target;
+    }
+};
+    function clone(target){
+        if(typeof target=='object'){
+            let cloneTarget=Array.isArray(target)?[]:{};
+            for (const key in target){
+                cloneTarget[key]=clone(target[key])
+            }
+            return cloneTarget
+        }else{
+            return target;
+        }
+    }
+    </script>
+</body>
+</html>
